@@ -1,0 +1,36 @@
+#include <iostream>
+#include <vector>
+#include <map>
+using namespace std;
+
+class NetworkDB {
+    map<string, vector<string>> graph;
+
+public:
+    void addRelation(const string& entity1, const string& entity2) {
+        graph[entity1].push_back(entity2);
+        graph[entity2].push_back(entity1);
+    }
+
+    void display() {
+        for (const auto& [entity, relations] : graph) {
+            cout << entity << " -> ";
+            for (const auto& rel : relations) {
+                cout << rel << " ";
+            }
+            cout << "\n";
+        }
+    }
+};
+
+int main() {
+    NetworkDB db;
+    db.addRelation("Alice", "Project A");
+    db.addRelation("Alice", "Team 1");
+    db.addRelation("Bob", "Team 1");
+    db.addRelation("Bob", "Project B");
+
+    cout << "Network DB Relationships:\n";
+    db.display();
+    return 0;
+}

@@ -1,0 +1,40 @@
+#include <iostream>
+#include <map>
+#include <string>
+using namespace std;
+
+class KeyValueDB {
+    map<string, string> db;
+
+public:
+    void insert(const string& key, const string& value) {
+        db[key] = value;
+        cout << "Key-Value pair added successfully.\n";
+    }
+
+    void display() {
+        for (const auto& [key, value] : db) {
+            cout << key << ": " << value << "\n";
+        }
+    }
+
+    void find(const string& key) {
+        if (db.find(key) != db.end()) {
+            cout << "Found: " << key << " -> " << db[key] << "\n";
+        } else {
+            cout << "Key not found.\n";
+        }
+    }
+};
+
+int main() {
+    KeyValueDB db;
+    db.insert("username", "Alice");
+    db.insert("password", "1234");
+    db.insert("email", "alice@example.com");
+
+    cout << "Key-Value DB Contents:\n";
+    db.display();
+    db.find("username");
+    return 0;
+}

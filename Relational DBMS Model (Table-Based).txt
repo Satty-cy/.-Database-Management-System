@@ -1,0 +1,46 @@
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+struct Record {
+    int id;
+    string name;
+    int age;
+};
+
+class RelationalDB {
+    vector<Record> table;
+
+public:
+    void insert(int id, const string& name, int age) {
+        table.push_back({id, name, age});
+        cout << "Record inserted successfully.\n";
+    }
+
+    void display() {
+        cout << "ID\tName\tAge\n";
+        for (const auto& record : table) {
+            cout << record.id << "\t" << record.name << "\t" << record.age << "\n";
+        }
+    }
+
+    void findByID(int id) {
+        for (const auto& record : table) {
+            if (record.id == id) {
+                cout << "Record found: " << record.id << " " << record.name << " " << record.age << "\n";
+                return;
+            }
+        }
+        cout << "Record not found.\n";
+    }
+};
+
+int main() {
+    RelationalDB db;
+    db.insert(1, "Alice", 25);
+    db.insert(2, "Bob", 30);
+    db.display();
+    db.findByID(1);
+    return 0;
+}
